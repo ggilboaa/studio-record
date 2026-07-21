@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04C22A08CF5B5A6FBAF1EE6D /* FloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0460C483D87B1D4122CE1BF /* FloatingPanelView.swift */; };
+		2ADB58C82E89CE59952445E6 /* ScreenCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145CCE5E63ED958649A1AAF5 /* ScreenCaptureManager.swift */; };
+		315DBB4F7135F3FD4D704D64 /* VirtualCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AC8D8EA514CD7E11B69604 /* VirtualCameraManager.swift */; };
+		33F32A98B060D3D338FBD7B5 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD022B19BF95E09882F9632 /* SceneManager.swift */; };
+		3ADA6316E25CFFF1A51D6305 /* Scene1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFE5935C1979C2F0602C0A /* Scene1View.swift */; };
+		3CDE3662156CEDE17364C286 /* CameraDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A4FBE77CCB66D6607ED9D0 /* CameraDevice.swift */; };
+		41EF8BD6B06269353A22AC79 /* StudioRecordCamera.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B9E2D08552930315DEB06EDC /* StudioRecordCamera.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		461BB8CE294984004234C60B /* FloatingPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33417DEA12FED54045FAA8 /* FloatingPanelController.swift */; };
+		496C737F7231E3BD439814ED /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D728A391ED4B32FF7105935F /* CameraPreviewView.swift */; };
+		543799A9602ABDF9FAF2FB09 /* CameraProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DAE514722640891A1FDF3 /* CameraProvider.swift */; };
+		659ABC72565E3AA499FBFE69 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE62D4E8851ADC1F593B0F /* CameraManager.swift */; };
+		66794D3E5EDA493F97BB313B /* WindowPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99679CD10DCFBFBDB7EEFA2A /* WindowPickerView.swift */; };
+		6D30C4ECF2A80F167718D8FA /* Scene4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF6C7A3DB1F6232D6BD0486 /* Scene4View.swift */; };
+		7495CBCB8D3C1F0819060AB1 /* RecordingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7272DC4ACF95D7217820785D /* RecordingManager.swift */; };
+		78C02ED2448D42BBC5A0A08F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C9016FD4243EFB64A8D8EF /* main.swift */; };
+		7EB122104189406DAF26F472 /* AppPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B646004FA377DE5FFC27AE /* AppPersistence.swift */; };
+		8C6B6FB4FF8D21B30BDA28BD /* Scene3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39EAC649173F05A03ED0490 /* Scene3View.swift */; };
+		8C9CE966E9C1AD538B6EF8E1 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64ABC3DBB4ECDEE03B210E5 /* ControlBarView.swift */; };
+		A6244DE4F09F5E7358D6B0D6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35CE55D3C9084BB70A6BF /* AppSettings.swift */; };
+		AB7B80615522CDA906BAE470 /* Scene2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B9CD2856519AE191A34C1E /* Scene2View.swift */; };
+		BC6F6670D55CE63114072C01 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BFB13171C7C794338C4A01 /* MenuBarController.swift */; };
+		CF6DB2891E857DA95E083DEF /* FloatingCircleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */; };
+		D0F7943998FB2C300DE9C330 /* StudioRecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */; };
+		D238712E87C7942AEA3F2ECB /* CameraStreamSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B383286BF8B077565425FC /* CameraStreamSource.swift */; };
+		FEF136E02C6947F890A71FB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF857D6D30059B0F6146EB /* ContentView.swift */; };
+		FFAC8B040276E2AADE6F78D4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E975E823C228C868E5D5C /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E3A8521A4B51AC6826C818E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7BD53B6447E03460AF5FDD0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94213BF692555CF7D4F0F88E;
+			remoteInfo = StudioRecordCamera;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1B16E109270FDD53B57C0A4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				41EF8BD6B06269353A22AC79 /* StudioRecordCamera.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		145CCE5E63ED958649A1AAF5 /* ScreenCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureManager.swift; sourceTree = "<group>"; };
+		19A4FBE77CCB66D6607ED9D0 /* CameraDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDevice.swift; sourceTree = "<group>"; };
+		2A33417DEA12FED54045FAA8 /* FloatingPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelController.swift; sourceTree = "<group>"; };
+		2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioRecordApp.swift; sourceTree = "<group>"; };
+		4CD022B19BF95E09882F9632 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
+		564E975E823C228C868E5D5C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		57B383286BF8B077565425FC /* CameraStreamSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraStreamSource.swift; sourceTree = "<group>"; };
+		5BED9F986837D147B5E589B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5DF6C7A3DB1F6232D6BD0486 /* Scene4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene4View.swift; sourceTree = "<group>"; };
+		7272DC4ACF95D7217820785D /* RecordingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingManager.swift; sourceTree = "<group>"; };
+		74B646004FA377DE5FFC27AE /* AppPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPersistence.swift; sourceTree = "<group>"; };
+		755B25FA4927116A3F91F670 /* StudioRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudioRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E35CE55D3C9084BB70A6BF /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		87B9CD2856519AE191A34C1E /* Scene2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene2View.swift; sourceTree = "<group>"; };
+		92BFB13171C7C794338C4A01 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		99679CD10DCFBFBDB7EEFA2A /* WindowPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPickerView.swift; sourceTree = "<group>"; };
+		A0460C483D87B1D4122CE1BF /* FloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelView.swift; sourceTree = "<group>"; };
+		A0FE62D4E8851ADC1F593B0F /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		A3FFE5935C1979C2F0602C0A /* Scene1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene1View.swift; sourceTree = "<group>"; };
+		ABEF857D6D30059B0F6146EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B64ABC3DBB4ECDEE03B210E5 /* ControlBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
+		B9E2D08552930315DEB06EDC /* StudioRecordCamera.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StudioRecordCamera.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C9016FD4243EFB64A8D8EF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCircleState.swift; sourceTree = "<group>"; };
+		D0AC8D8EA514CD7E11B69604 /* VirtualCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualCameraManager.swift; sourceTree = "<group>"; };
+		D728A391ED4B32FF7105935F /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		DAD72AD989C7A707F9430A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E04DAE514722640891A1FDF3 /* CameraProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProvider.swift; sourceTree = "<group>"; };
+		F39EAC649173F05A03ED0490 /* Scene3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene3View.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0399A7EBF8CF9F2B85CA2620 /* StudioRecord */ = {
+			isa = PBXGroup;
+			children = (
+				74B646004FA377DE5FFC27AE /* AppPersistence.swift */,
+				75E35CE55D3C9084BB70A6BF /* AppSettings.swift */,
+				A0FE62D4E8851ADC1F593B0F /* CameraManager.swift */,
+				D728A391ED4B32FF7105935F /* CameraPreviewView.swift */,
+				ABEF857D6D30059B0F6146EB /* ContentView.swift */,
+				B64ABC3DBB4ECDEE03B210E5 /* ControlBarView.swift */,
+				CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */,
+				2A33417DEA12FED54045FAA8 /* FloatingPanelController.swift */,
+				A0460C483D87B1D4122CE1BF /* FloatingPanelView.swift */,
+				DAD72AD989C7A707F9430A58 /* Info.plist */,
+				92BFB13171C7C794338C4A01 /* MenuBarController.swift */,
+				7272DC4ACF95D7217820785D /* RecordingManager.swift */,
+				A3FFE5935C1979C2F0602C0A /* Scene1View.swift */,
+				87B9CD2856519AE191A34C1E /* Scene2View.swift */,
+				F39EAC649173F05A03ED0490 /* Scene3View.swift */,
+				5DF6C7A3DB1F6232D6BD0486 /* Scene4View.swift */,
+				4CD022B19BF95E09882F9632 /* SceneManager.swift */,
+				145CCE5E63ED958649A1AAF5 /* ScreenCaptureManager.swift */,
+				564E975E823C228C868E5D5C /* SettingsView.swift */,
+				2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */,
+				D0AC8D8EA514CD7E11B69604 /* VirtualCameraManager.swift */,
+				99679CD10DCFBFBDB7EEFA2A /* WindowPickerView.swift */,
+			);
+			path = StudioRecord;
+			sourceTree = "<group>";
+		};
+		2F54AFE84BC39DC811B81331 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				755B25FA4927116A3F91F670 /* StudioRecord.app */,
+				B9E2D08552930315DEB06EDC /* StudioRecordCamera.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6636D9EB8107736C842C7A49 /* StudioRecordCamera */ = {
+			isa = PBXGroup;
+			children = (
+				19A4FBE77CCB66D6607ED9D0 /* CameraDevice.swift */,
+				E04DAE514722640891A1FDF3 /* CameraProvider.swift */,
+				57B383286BF8B077565425FC /* CameraStreamSource.swift */,
+				5BED9F986837D147B5E589B0 /* Info.plist */,
+				C8C9016FD4243EFB64A8D8EF /* main.swift */,
+			);
+			path = StudioRecordCamera;
+			sourceTree = "<group>";
+		};
+		AB84944FC961341471164510 = {
+			isa = PBXGroup;
+			children = (
+				0399A7EBF8CF9F2B85CA2620 /* StudioRecord */,
+				6636D9EB8107736C842C7A49 /* StudioRecordCamera */,
+				2F54AFE84BC39DC811B81331 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		94213BF692555CF7D4F0F88E /* StudioRecordCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EED4B46BDAA727610BB844F /* Build configuration list for PBXNativeTarget "StudioRecordCamera" */;
+			buildPhases = (
+				549D3FA17D47E30E0EADCC00 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StudioRecordCamera;
+			packageProductDependencies = (
+			);
+			productName = StudioRecordCamera;
+			productReference = B9E2D08552930315DEB06EDC /* StudioRecordCamera.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E58E91969953129AA54FE5BF /* StudioRecord */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6FE224992087474BDAAB4E4 /* Build configuration list for PBXNativeTarget "StudioRecord" */;
+			buildPhases = (
+				E303B49E49B48E4A64AE9357 /* Sources */,
+				F1B16E109270FDD53B57C0A4 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35DB258DF048238A787759C1 /* PBXTargetDependency */,
+			);
+			name = StudioRecord;
+			packageProductDependencies = (
+			);
+			productName = StudioRecord;
+			productReference = 755B25FA4927116A3F91F670 /* StudioRecord.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7BD53B6447E03460AF5FDD0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					94213BF692555CF7D4F0F88E = {
+						DevelopmentTeam = XR9FT65L4U;
+						ProvisioningStyle = Automatic;
+					};
+					E58E91969953129AA54FE5BF = {
+						DevelopmentTeam = XR9FT65L4U;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 903A341C0EE3D32CBFA1B8C4 /* Build configuration list for PBXProject "StudioRecord" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = AB84944FC961341471164510;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2F54AFE84BC39DC811B81331 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E58E91969953129AA54FE5BF /* StudioRecord */,
+				94213BF692555CF7D4F0F88E /* StudioRecordCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		549D3FA17D47E30E0EADCC00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CDE3662156CEDE17364C286 /* CameraDevice.swift in Sources */,
+				543799A9602ABDF9FAF2FB09 /* CameraProvider.swift in Sources */,
+				D238712E87C7942AEA3F2ECB /* CameraStreamSource.swift in Sources */,
+				78C02ED2448D42BBC5A0A08F /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E303B49E49B48E4A64AE9357 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB122104189406DAF26F472 /* AppPersistence.swift in Sources */,
+				A6244DE4F09F5E7358D6B0D6 /* AppSettings.swift in Sources */,
+				659ABC72565E3AA499FBFE69 /* CameraManager.swift in Sources */,
+				496C737F7231E3BD439814ED /* CameraPreviewView.swift in Sources */,
+				FEF136E02C6947F890A71FB7 /* ContentView.swift in Sources */,
+				8C9CE966E9C1AD538B6EF8E1 /* ControlBarView.swift in Sources */,
+				CF6DB2891E857DA95E083DEF /* FloatingCircleState.swift in Sources */,
+				461BB8CE294984004234C60B /* FloatingPanelController.swift in Sources */,
+				04C22A08CF5B5A6FBAF1EE6D /* FloatingPanelView.swift in Sources */,
+				BC6F6670D55CE63114072C01 /* MenuBarController.swift in Sources */,
+				7495CBCB8D3C1F0819060AB1 /* RecordingManager.swift in Sources */,
+				3ADA6316E25CFFF1A51D6305 /* Scene1View.swift in Sources */,
+				AB7B80615522CDA906BAE470 /* Scene2View.swift in Sources */,
+				8C6B6FB4FF8D21B30BDA28BD /* Scene3View.swift in Sources */,
+				6D30C4ECF2A80F167718D8FA /* Scene4View.swift in Sources */,
+				33F32A98B060D3D338FBD7B5 /* SceneManager.swift in Sources */,
+				2ADB58C82E89CE59952445E6 /* ScreenCaptureManager.swift in Sources */,
+				FFAC8B040276E2AADE6F78D4 /* SettingsView.swift in Sources */,
+				D0F7943998FB2C300DE9C330 /* StudioRecordApp.swift in Sources */,
+				315DBB4F7135F3FD4D704D64 /* VirtualCameraManager.swift in Sources */,
+				66794D3E5EDA493F97BB313B /* WindowPickerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		35DB258DF048238A787759C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94213BF692555CF7D4F0F88E /* StudioRecordCamera */;
+			targetProxy = 5E3A8521A4B51AC6826C818E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0144B7E18B962FD7D80F56F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = StudioRecordCamera/StudioRecordCamera.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = StudioRecordCamera/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiorecord.app.camera;
+				PRODUCT_NAME = StudioRecordCamera;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3942118689DBCD7B9E589CA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StudioRecord/StudioRecord.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = StudioRecord/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiorecord.app;
+				PRODUCT_NAME = StudioRecord;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3D5AFEB824DF7A536A864D02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StudioRecord/StudioRecord.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = StudioRecord/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiorecord.app;
+				PRODUCT_NAME = StudioRecord;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		64EC684763A9BA247E6CDA4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = XR9FT65L4U;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		AA444F62CBF80EE53BDD2BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = XR9FT65L4U;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		FC5E8DD25F1F5B3E3AF69F4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = StudioRecordCamera/StudioRecordCamera.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = StudioRecordCamera/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiorecord.app.camera;
+				PRODUCT_NAME = StudioRecordCamera;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EED4B46BDAA727610BB844F /* Build configuration list for PBXNativeTarget "StudioRecordCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC5E8DD25F1F5B3E3AF69F4C /* Debug */,
+				0144B7E18B962FD7D80F56F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		903A341C0EE3D32CBFA1B8C4 /* Build configuration list for PBXProject "StudioRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64EC684763A9BA247E6CDA4E /* Debug */,
+				AA444F62CBF80EE53BDD2BFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A6FE224992087474BDAAB4E4 /* Build configuration list for PBXNativeTarget "StudioRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5AFEB824DF7A536A864D02 /* Debug */,
+				3942118689DBCD7B9E589CA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7BD53B6447E03460AF5FDD0 /* Project object */;
+}

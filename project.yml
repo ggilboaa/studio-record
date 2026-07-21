@@ -1,0 +1,83 @@
+name: StudioRecord
+options:
+  bundleIdPrefix: com.studiorecord
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+
+schemes:
+  StudioRecord:
+    build:
+      targets:
+        StudioRecord: all
+        StudioRecordCamera: all
+    run:
+      executable: StudioRecord
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    DEVELOPMENT_TEAM: XR9FT65L4U
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+
+  StudioRecord:
+    type: application
+    platform: macOS
+    sources:
+      - path: StudioRecord
+        excludes:
+          - "*.entitlements"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.studiorecord.app
+        PRODUCT_NAME: StudioRecord
+        CODE_SIGN_ENTITLEMENTS: StudioRecord/StudioRecord.entitlements
+        INFOPLIST_FILE: StudioRecord/Info.plist
+        ENABLE_HARDENED_RUNTIME: YES
+        COMBINE_HIDPI_IMAGES: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: StudioRecordCamera
+        embed: true
+        buildPhase: extensions
+    info:
+      path: StudioRecord/Info.plist
+      properties:
+        CFBundleName: Studio Record
+        CFBundleDisplayName: Studio Record
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        LSMinimumSystemVersion: "14.0"
+        NSCameraUsageDescription: Studio Record צריך גישה למצלמה לתצוגה מקדימה והקלטה
+        NSMicrophoneUsageDescription: Studio Record צריך גישה למיקרופון להקלטה
+        NSPrincipalClass: NSApplication
+
+  StudioRecordCamera:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: StudioRecordCamera
+        excludes:
+          - "*.entitlements"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.studiorecord.app.camera
+        PRODUCT_NAME: StudioRecordCamera
+        CODE_SIGN_ENTITLEMENTS: StudioRecordCamera/StudioRecordCamera.entitlements
+        INFOPLIST_FILE: StudioRecordCamera/Info.plist
+        ENABLE_HARDENED_RUNTIME: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+    info:
+      path: StudioRecordCamera/Info.plist
+      properties:
+        CFBundleName: StudioRecordCamera
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        LSMinimumSystemVersion: "14.0"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.cmio.camera-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).CameraProvider
