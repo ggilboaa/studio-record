@@ -147,12 +147,12 @@ struct FloatingPanelView: View {
                 }
             }
 
-            // עיגול / מצלמה
+            // הסתר וידאו
             PanelCardButton(isActive: isCurrentlyHidden, activeColor: .appRed, width: 52,
                             action: { toggleVisibility() }) {
                 VStack(spacing: 3) {
                     Circle().stroke(lineWidth: 1.6).frame(width: 13, height: 13)
-                    Text("עיגול").font(.system(size: 10.5, weight: .bold))
+                    Text("וידאו").font(.system(size: 10.5, weight: .bold))
                 }
             }
 

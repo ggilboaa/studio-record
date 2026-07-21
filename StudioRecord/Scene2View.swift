@@ -78,6 +78,54 @@ struct FloatingCameraCircle: View {
     @State private var lastSize: CGFloat  = 150
 
     var body: some View {
+        GeometryReader { geo in
+            let container = geo.size
+            circleContent
+                .position(
+                    x: state.position.x + dragOffset.width,
+                    y: state.position.y + dragOffset.height
+                )
+                .gesture(
+                    DragGesture(minimumDistance: 2)
+                        .onChanged { v in
+                            guard !state.isLocked else { return }
+                            dragOffset = v.translation
+                        }
+                        .onEnded { v in
+                            guard !state.isLocked else { return }
+                            state.position.x += v.translation.width
+                            state.position.y += v.translation.height
+                            dragOffset = .zero
+                        }
+                )
+                .gesture(MagnifyGesture()
+                    .onChanged { v in
+                        guard !state.isLocked else { return }
+                        state.size = max(80, min(420, lastSize * v.magnification))
+                    }
+                    .onEnded { _ in
+                        guard !state.isLocked else { return }
+                        lastSize = state.size
+                    }
+                )
+                .onAppear {
+                    lastSize = state.size
+                    // Clamp initial position inside container
+                    if container.width > 0 {
+                        state.position.x = min(max(state.position.x, 0), container.width)
+                        state.position.y = min(max(state.position.y, 0), container.height)
+                    }
+                }
+                .onChange(of: container) { oldSize, newSize in
+                    // Rescale position proportionally when container resizes
+                    guard oldSize.width > 0, oldSize.height > 0 else { return }
+                    state.position.x = state.position.x * newSize.width  / oldSize.width
+                    state.position.y = state.position.y * newSize.height / oldSize.height
+                }
+        }
+    }
+
+    private var circleContent: some View {
         ZStack {
             CameraPreviewView(session: session, isMirrored: isMirrored, gravity: .resizeAspectFill)
                 .frame(width: state.frameWidth, height: state.frameHeight)
@@ -87,7 +135,7 @@ struct FloatingCameraCircle: View {
                 .shadow(color: .black.opacity(0.45), radius: 10)
                 .allowsHitTesting(false)
 
-            // Transparent drag target so gestures register over the camera layer
+            // Transparent drag target
             CircleClipShape(shape: state.shape, cornerFraction: 0.12)
                 .fill(Color(white: 0, opacity: 0.001))
                 .frame(width: state.frameWidth, height: state.frameHeight)
@@ -113,33 +161,5 @@ struct FloatingCameraCircle: View {
                     )
             }
         }
-        .position(
-            x: state.position.x + dragOffset.width,
-            y: state.position.y + dragOffset.height
-        )
-        .gesture(
-            DragGesture(minimumDistance: 2)
-                .onChanged { v in
-                    guard !state.isLocked else { return }
-                    dragOffset = v.translation
-                }
-                .onEnded { v in
-                    guard !state.isLocked else { return }
-                    state.position.x += v.translation.width
-                    state.position.y += v.translation.height
-                    dragOffset = .zero
-                }
-        )
-        .gesture(MagnifyGesture()
-            .onChanged { v in
-                guard !state.isLocked else { return }
-                state.size = max(80, min(420, lastSize * v.magnification))
-            }
-            .onEnded { _ in
-                guard !state.isLocked else { return }
-                lastSize = state.size
-            }
-        )
-        .onAppear { lastSize = state.size }
     }
 }
