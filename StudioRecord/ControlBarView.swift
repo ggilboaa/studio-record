@@ -21,17 +21,30 @@ struct ControlBarView: View {
         HStack(spacing: 12) {
 
             // ── Scene switcher ──────────────────────────────────────────
-            HStack(spacing: 3) {
+            HStack(spacing: 2) {
                 ForEach(AppScene.allCases, id: \.rawValue) { scene in
+                    let active = sceneManager.activeScene == scene
                     Button { sceneManager.setScene(scene) } label: {
                         Label(scene.title, systemImage: scene.icon)
                             .labelStyle(.iconOnly)
+                            .foregroundStyle(active ? Color.appBlueText : Color.appLabel3)
+                            .frame(minWidth: 30, minHeight: 26)
+                            .background(
+                                Group {
+                                    if active {
+                                        RoundedRectangle(cornerRadius: 6).fill(Color.white)
+                                            .shadow(color: .black.opacity(0.14), radius: 2, y: 1)
+                                    }
+                                }
+                            )
                     }
-                    .buttonStyle(.bordered)
-                    .tint(sceneManager.activeScene == scene ? .accentColor : nil)
+                    .buttonStyle(.plain)
                     .help(scene.title)
                 }
             }
+            .padding(3)
+            .background(Color.appSegment)
+            .clipShape(RoundedRectangle(cornerRadius: 9))
 
             Divider().frame(height: 22)
 

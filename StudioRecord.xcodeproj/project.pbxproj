@@ -28,6 +28,7 @@
 		A6244DE4F09F5E7358D6B0D6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35CE55D3C9084BB70A6BF /* AppSettings.swift */; };
 		AB7B80615522CDA906BAE470 /* Scene2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B9CD2856519AE191A34C1E /* Scene2View.swift */; };
 		BC6F6670D55CE63114072C01 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BFB13171C7C794338C4A01 /* MenuBarController.swift */; };
+		C62C9A01027451775F6EC2C2 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA77AA635963ACC5D8A4D2E /* AppColors.swift */; };
 		CF6DB2891E857DA95E083DEF /* FloatingCircleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */; };
 		D0F7943998FB2C300DE9C330 /* StudioRecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */; };
 		D238712E87C7942AEA3F2ECB /* CameraStreamSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B383286BF8B077565425FC /* CameraStreamSource.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		145CCE5E63ED958649A1AAF5 /* ScreenCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureManager.swift; sourceTree = "<group>"; };
 		19A4FBE77CCB66D6607ED9D0 /* CameraDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDevice.swift; sourceTree = "<group>"; };
+		1CA77AA635963ACC5D8A4D2E /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2A33417DEA12FED54045FAA8 /* FloatingPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelController.swift; sourceTree = "<group>"; };
 		2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioRecordApp.swift; sourceTree = "<group>"; };
 		4CD022B19BF95E09882F9632 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		0399A7EBF8CF9F2B85CA2620 /* StudioRecord */ = {
 			isa = PBXGroup;
 			children = (
+				1CA77AA635963ACC5D8A4D2E /* AppColors.swift */,
 				74B646004FA377DE5FFC27AE /* AppPersistence.swift */,
 				75E35CE55D3C9084BB70A6BF /* AppSettings.swift */,
 				A0FE62D4E8851ADC1F593B0F /* CameraManager.swift */,
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62C9A01027451775F6EC2C2 /* AppColors.swift in Sources */,
 				7EB122104189406DAF26F472 /* AppPersistence.swift in Sources */,
 				A6244DE4F09F5E7358D6B0D6 /* AppSettings.swift in Sources */,
 				659ABC72565E3AA499FBFE69 /* CameraManager.swift in Sources */,

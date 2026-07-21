@@ -28,8 +28,8 @@ class FloatingPanelController: NSObject, ObservableObject, NSWindowDelegate {
         let hosting = NSHostingView(rootView: view)
 
         let p = NSPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 48),
-            styleMask:   [.nonactivatingPanel, .hudWindow, .closable],
+            contentRect: NSRect(x: 0, y: 0, width: 560, height: 110),
+            styleMask:   [.nonactivatingPanel, .closable, .fullSizeContentView],
             backing:     .buffered,
             defer:       false
         )
@@ -38,6 +38,8 @@ class FloatingPanelController: NSObject, ObservableObject, NSWindowDelegate {
         p.isMovableByWindowBackground  = true
         p.hidesOnDeactivate            = false
         p.isFloatingPanel              = true
+        p.isOpaque                     = false
+        p.backgroundColor              = .clear
         p.contentView                  = hosting
         p.delegate                     = self
         p.isReleasedWhenClosed         = false
