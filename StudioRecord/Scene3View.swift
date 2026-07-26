@@ -10,6 +10,34 @@ class WebNavState: NSObject, ObservableObject, WKNavigationDelegate {
 
     weak var webView: WKWebView?
 
+    // MARK: - Snapshot for recording
+    var frameSnapshotHandler: ((CGImage) -> Void)?
+    private var snapshotTimer: Timer?
+
+    func startSnapshots() {
+        guard snapshotTimer == nil else { return }
+        snapshotTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 20.0, repeats: true) { [weak self] _ in
+            self?.captureSnapshot()
+        }
+    }
+
+    func stopSnapshots() {
+        snapshotTimer?.invalidate()
+        snapshotTimer = nil
+    }
+
+    private func captureSnapshot() {
+        guard let wv = webView, let handler = frameSnapshotHandler else { return }
+        let config = WKSnapshotConfiguration()
+        wv.takeSnapshot(with: config) { image, _ in
+            guard let nsImage = image else { return }
+            var rect = CGRect(origin: .zero, size: nsImage.size)
+            if let cg = nsImage.cgImage(forProposedRect: &rect, context: nil, hints: nil) {
+                handler(cg)
+            }
+        }
+    }
+
     func navigate(to raw: String) {
         var s = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !s.isEmpty else { return }

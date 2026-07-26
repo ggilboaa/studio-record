@@ -11,6 +11,7 @@ class ScreenCaptureManager: NSObject, ObservableObject {
 
     let displayLayer = AVSampleBufferDisplayLayer()
     var audioSampleHandler: ((CMSampleBuffer) -> Void)?
+    var videoSampleHandler: ((CMSampleBuffer) -> Void)?
 
     private var stream: SCStream?
     private let videoQueue = DispatchQueue(label: "com.studiorecord.sc.video")
@@ -75,6 +76,7 @@ extension ScreenCaptureManager: SCStreamOutput {
         guard sampleBuffer.isValid else { return }
         switch type {
         case .screen:
+            videoSampleHandler?(sampleBuffer)
             let buf = sampleBuffer
             DispatchQueue.main.async { [weak self] in
                 self?.displayLayer.enqueue(buf)

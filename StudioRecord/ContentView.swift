@@ -13,6 +13,7 @@ struct ContentView: View {
     @StateObject private var virtualCamera    = VirtualCameraManager()
     @StateObject private var appSettings      = AppSettings()
     @StateObject private var panelController  = FloatingPanelController()
+    @StateObject private var compositor       = SceneCompositor()
 
     @State private var showWindowPicker  = false
     @State private var browserURLInput   = ""
@@ -101,6 +102,10 @@ struct ContentView: View {
         // ── Persist scene changes ────────────────────────────────────────
         .onChange(of: sceneManager.activeScene) { _, scene in
             AppPersistence.save(scene: scene)
+            updateBrowserSnapshots()
+        }
+        .onChange(of: recordingManager.isRecording) { _, _ in
+            updateBrowserSnapshots()
         }
         .onChange(of: webNav.displayURL) { _, url in
             if !url.isEmpty { AppPersistence.save(browserURL: url) }
@@ -192,6 +197,14 @@ struct ContentView: View {
         sceneManager.activeScene == .browser ? circleState3 : circleState2
     }
 
+    private func updateBrowserSnapshots() {
+        if sceneManager.activeScene == .browser && recordingManager.isRecording {
+            webNav.startSnapshots()
+        } else {
+            webNav.stopSnapshots()
+        }
+    }
+
     // MARK: - Setup
 
     private func setup() {
@@ -199,10 +212,32 @@ struct ContentView: View {
         recordingManager.saveFolder          = appSettings.saveFolder
         recordingManager.separateAudioTracks = appSettings.separateAudioTracks
 
-        // Wire sample handlers
-        cameraManager.videoSampleHandler = { [weak recordingManager] buf in
+        // Wire compositor
+        compositor.sceneManager  = sceneManager
+        compositor.circleState2  = circleState2
+        compositor.circleState3  = circleState3
+        compositor.cameraManager = cameraManager
+
+        // Video: camera → compositor → recorder (only when recording)
+        cameraManager.videoSampleHandler = { [weak compositor, weak recordingManager] buf in
+            guard recordingManager?.isRecording == true else { return }
+            compositor?.processCameraFrame(buf)
+        }
+        compositor.composedFrameHandler = { [weak recordingManager] buf in
             recordingManager?.appendVideoFrame(buf)
         }
+
+        // Window frames → compositor
+        screenCapture.videoSampleHandler = { [weak compositor] buf in
+            compositor?.processWindowFrame(buf)
+        }
+
+        // Browser frames → compositor (snapshots started on scene/recording change)
+        webNav.frameSnapshotHandler = { [weak compositor] cgImage in
+            compositor?.processBrowserFrame(cgImage)
+        }
+
+        // Audio: mic + system audio → recorder
         cameraManager.audioSampleHandler = { [weak recordingManager] buf in
             recordingManager?.appendMicAudio(buf)
         }

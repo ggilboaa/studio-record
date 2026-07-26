@@ -30,13 +30,16 @@ class CameraManager: NSObject, ObservableObject {
         )
         availableCameras = discovery.devices
 
-        sessionQueue.async { [weak self] in
+        // Request mic permission first, then configure session
+        AVCaptureDevice.requestAccess(for: .audio) { [weak self] _ in
             guard let self else { return }
-            self.session.beginConfiguration()
-            self.session.sessionPreset = .hd1920x1080
-            self.addMicInput()
-            self.addDataOutputs()
-            self.session.commitConfiguration()
+            self.sessionQueue.async {
+                self.session.beginConfiguration()
+                self.session.sessionPreset = .hd1920x1080
+                self.addMicInput()
+                self.addDataOutputs()
+                self.session.commitConfiguration()
+            }
         }
 
         if let camera = availableCameras.first {

@@ -28,6 +28,7 @@
 		A6244DE4F09F5E7358D6B0D6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35CE55D3C9084BB70A6BF /* AppSettings.swift */; };
 		AB7B80615522CDA906BAE470 /* Scene2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B9CD2856519AE191A34C1E /* Scene2View.swift */; };
 		BC6F6670D55CE63114072C01 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BFB13171C7C794338C4A01 /* MenuBarController.swift */; };
+		C2E93EA89C525831A02B86DC /* SceneCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A49CDE2451CC189412CC3A /* SceneCompositor.swift */; };
 		C62C9A01027451775F6EC2C2 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA77AA635963ACC5D8A4D2E /* AppColors.swift */; };
 		CF6DB2891E857DA95E083DEF /* FloatingCircleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */; };
 		D0F7943998FB2C300DE9C330 /* StudioRecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3170555181DEA7A342D10 /* StudioRecordApp.swift */; };
@@ -87,6 +88,7 @@
 		C8C9016FD4243EFB64A8D8EF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CFFC6A3BF5DBAC90FAB2560F /* FloatingCircleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCircleState.swift; sourceTree = "<group>"; };
 		D0AC8D8EA514CD7E11B69604 /* VirtualCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualCameraManager.swift; sourceTree = "<group>"; };
+		D3A49CDE2451CC189412CC3A /* SceneCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCompositor.swift; sourceTree = "<group>"; };
 		D728A391ED4B32FF7105935F /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		DAD72AD989C7A707F9430A58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E04DAE514722640891A1FDF3 /* CameraProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProvider.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				87B9CD2856519AE191A34C1E /* Scene2View.swift */,
 				F39EAC649173F05A03ED0490 /* Scene3View.swift */,
 				5DF6C7A3DB1F6232D6BD0486 /* Scene4View.swift */,
+				D3A49CDE2451CC189412CC3A /* SceneCompositor.swift */,
 				4CD022B19BF95E09882F9632 /* SceneManager.swift */,
 				145CCE5E63ED958649A1AAF5 /* ScreenCaptureManager.swift */,
 				564E975E823C228C868E5D5C /* SettingsView.swift */,
@@ -264,6 +267,7 @@
 				AB7B80615522CDA906BAE470 /* Scene2View.swift in Sources */,
 				8C6B6FB4FF8D21B30BDA28BD /* Scene3View.swift in Sources */,
 				6D30C4ECF2A80F167718D8FA /* Scene4View.swift in Sources */,
+				C2E93EA89C525831A02B86DC /* SceneCompositor.swift in Sources */,
 				33F32A98B060D3D338FBD7B5 /* SceneManager.swift in Sources */,
 				2ADB58C82E89CE59952445E6 /* ScreenCaptureManager.swift in Sources */,
 				FFAC8B040276E2AADE6F78D4 /* SettingsView.swift in Sources */,
