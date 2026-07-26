@@ -6,7 +6,8 @@ struct ContentView: View {
     @StateObject private var recordingManager = RecordingManager()
     @StateObject private var sceneManager     = SceneManager()
     @StateObject private var screenCapture    = ScreenCaptureManager()
-    @StateObject private var circleState      = FloatingCircleState()
+    @StateObject private var circleState2     = FloatingCircleState()
+    @StateObject private var circleState3     = FloatingCircleState()
     @StateObject private var webNav           = WebNavState()
     @StateObject private var standbyState     = StandbyState()
     @StateObject private var virtualCamera    = VirtualCameraManager()
@@ -23,7 +24,7 @@ struct ContentView: View {
                 cameraManager:    cameraManager,
                 recordingManager: recordingManager,
                 sceneManager:     sceneManager,
-                circleState:      circleState,
+                circleState:      activeCircleState,
                 webNav:           webNav,
                 standbyState:     standbyState,
                 virtualCamera:    virtualCamera,
@@ -56,11 +57,11 @@ struct ContentView: View {
                             .opacity(sceneManager.activeScene == .standby ? 1 : 0)
                             .allowsHitTesting(sceneManager.activeScene == .standby)
 
-                        if sceneManager.activeScene.hasFloatingCircle, !circleState.isHidden {
+                        if sceneManager.activeScene.hasFloatingCircle, !activeCircleState.isHidden {
                             FloatingCameraCircle(
                                 session:    cameraManager.session,
                                 isMirrored: cameraManager.isMirrored,
-                                state:      circleState
+                                state:      activeCircleState
                             )
                         }
                     }
@@ -88,7 +89,7 @@ struct ContentView: View {
         .onReceive(nc.publisher(for: .studioSwitchScene)) { note in
             if let scene = note.object as? AppScene { sceneManager.setScene(scene) }
         }
-        .onReceive(nc.publisher(for: .studioToggleCircle))    { _ in circleState.isHidden.toggle() }
+        .onReceive(nc.publisher(for: .studioToggleCircle))    { _ in activeCircleState.isHidden.toggle() }
         .onReceive(nc.publisher(for: .studioToggleMic))       { _ in cameraManager.toggleMic() }
         .onReceive(nc.publisher(for: .studioToggleRecording)) { _ in
             if recordingManager.isRecording { recordingManager.stopRecording() }
@@ -187,6 +188,10 @@ struct ContentView: View {
 
     private var nc: NotificationCenter { .default }
 
+    private var activeCircleState: FloatingCircleState {
+        sceneManager.activeScene == .browser ? circleState3 : circleState2
+    }
+
     // MARK: - Setup
 
     private func setup() {
@@ -205,7 +210,8 @@ struct ContentView: View {
             recordingManager?.appendSystemAudio(buf)
         }
 
-        AppPersistence.load(circle: circleState)
+        AppPersistence.load(circle: circleState2, key: "circle2")
+        AppPersistence.load(circle: circleState3, key: "circle3")
 
         let savedScene = AppPersistence.loadScene()
         sceneManager.setScene(savedScene == .standby ? .camera : savedScene)
@@ -227,7 +233,8 @@ struct ContentView: View {
             recordingManager: recordingManager,
             sceneManager:     sceneManager,
             virtualCamera:    virtualCamera,
-            circleState:      circleState,
+            circleState2:     circleState2,
+            circleState3:     circleState3,
             webNav:           webNav
         )
 
@@ -243,7 +250,8 @@ struct ContentView: View {
         cameraManager.stop()
         Task { await screenCapture.stopCapture() }
 
-        AppPersistence.save(circle: circleState)
+        AppPersistence.save(circle: circleState2, key: "circle2")
+        AppPersistence.save(circle: circleState3, key: "circle3")
     }
 
     private func restoreCamera() {

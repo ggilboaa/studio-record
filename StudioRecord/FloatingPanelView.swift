@@ -41,7 +41,8 @@ struct FloatingPanelView: View {
     @ObservedObject var recordingManager: RecordingManager
     @ObservedObject var sceneManager:     SceneManager
     @ObservedObject var virtualCamera:    VirtualCameraManager
-    @ObservedObject var circleState:      FloatingCircleState
+    @ObservedObject var circleState2:     FloatingCircleState
+    @ObservedObject var circleState3:     FloatingCircleState
     @ObservedObject var webNav:           WebNavState
 
     var body: some View {
@@ -228,17 +229,21 @@ struct FloatingPanelView: View {
         }
     }
 
+    private var activeCircleState: FloatingCircleState {
+        sceneManager.activeScene == .browser ? circleState3 : circleState2
+    }
+
     private var isCurrentlyHidden: Bool {
         sceneManager.activeScene == .camera
             ? cameraManager.isCameraOff
-            : circleState.isHidden
+            : activeCircleState.isHidden
     }
 
     private func toggleVisibility() {
         if sceneManager.activeScene == .camera {
             cameraManager.toggleCamera()
         } else {
-            circleState.isHidden.toggle()
+            activeCircleState.isHidden.toggle()
         }
     }
 

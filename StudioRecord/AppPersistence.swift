@@ -20,23 +20,23 @@ enum AppPersistence {
     static func loadCameraID() -> String? { ud.string(forKey: "cameraID") }
     static func loadCameraMirrored() -> Bool { ud.bool(forKey: "cameraMirrored") }
 
-    // MARK: - Floating circle (normalized fractions, single shared state)
-    static func save(circle: FloatingCircleState) {
-        ud.set(Double(circle.normX),    forKey: "circle.normX")
-        ud.set(Double(circle.normY),    forKey: "circle.normY")
-        ud.set(Double(circle.normSize), forKey: "circle.normSize")
-        ud.set(circle.isLocked,         forKey: "circle.locked")
-        ud.set(circle.shape.rawValue,   forKey: "circle.shape")
+    // MARK: - Floating circle (normalized fractions, per-scene key: "circle2" / "circle3")
+    static func save(circle: FloatingCircleState, key: String) {
+        ud.set(Double(circle.normX),    forKey: "\(key).normX")
+        ud.set(Double(circle.normY),    forKey: "\(key).normY")
+        ud.set(Double(circle.normSize), forKey: "\(key).normSize")
+        ud.set(circle.isLocked,         forKey: "\(key).locked")
+        ud.set(circle.shape.rawValue,   forKey: "\(key).shape")
     }
-    static func load(circle: FloatingCircleState) {
-        let normX    = ud.double(forKey: "circle.normX")
-        let normY    = ud.double(forKey: "circle.normY")
-        let normSize = ud.double(forKey: "circle.normSize")
+    static func load(circle: FloatingCircleState, key: String) {
+        let normX    = ud.double(forKey: "\(key).normX")
+        let normY    = ud.double(forKey: "\(key).normY")
+        let normSize = ud.double(forKey: "\(key).normSize")
         if normX    > 0 { circle.normX    = CGFloat(normX) }
         if normY    > 0 { circle.normY    = CGFloat(normY) }
         if normSize > 0 { circle.normSize = CGFloat(normSize) }
-        circle.isLocked = ud.bool(forKey: "circle.locked")
-        circle.shape    = CircleShape(rawValue: ud.string(forKey: "circle.shape") ?? "") ?? .circle
+        circle.isLocked = ud.bool(forKey: "\(key).locked")
+        circle.shape    = CircleShape(rawValue: ud.string(forKey: "\(key).shape") ?? "") ?? .circle
     }
 
     // MARK: - Browser URL

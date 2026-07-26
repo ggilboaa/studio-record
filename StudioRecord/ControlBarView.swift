@@ -322,7 +322,7 @@ struct ControlBarView: View {
         }
     }
 
-    // Scene 2: Change window + lock + shape
+    // Scene 2: Change window + lock + shape + flip
     private var windowSecondaryRow: some View {
         Group {
             Button { showWindowPicker = true } label: {
@@ -347,6 +347,13 @@ struct ControlBarView: View {
             }
             .buttonStyle(.bordered)
             .help(circleState.shape == .circle ? "שנה למלבן מעוגל" : "שנה לעיגול")
+
+            Button { cameraManager.toggleFlip() } label: {
+                Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
+            }
+            .buttonStyle(.bordered)
+            .tint(cameraManager.isMirrored ? .accentColor : nil)
+            .help("הפוך צדדים")
         }
     }
 

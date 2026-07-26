@@ -9,7 +9,8 @@ class FloatingPanelController: NSObject, ObservableObject, NSWindowDelegate {
         recordingManager: RecordingManager,
         sceneManager:     SceneManager,
         virtualCamera:    VirtualCameraManager,
-        circleState:      FloatingCircleState,
+        circleState2:     FloatingCircleState,
+        circleState3:     FloatingCircleState,
         webNav:           WebNavState
     ) {
         guard panel == nil else { return }
@@ -19,7 +20,8 @@ class FloatingPanelController: NSObject, ObservableObject, NSWindowDelegate {
             recordingManager: recordingManager,
             sceneManager:     sceneManager,
             virtualCamera:    virtualCamera,
-            circleState:      circleState,
+            circleState2:     circleState2,
+            circleState3:     circleState3,
             webNav:           webNav
         )
 
