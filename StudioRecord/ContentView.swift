@@ -6,8 +6,7 @@ struct ContentView: View {
     @StateObject private var recordingManager = RecordingManager()
     @StateObject private var sceneManager     = SceneManager()
     @StateObject private var screenCapture    = ScreenCaptureManager()
-    @StateObject private var circleState2     = FloatingCircleState()
-    @StateObject private var circleState3     = FloatingCircleState()
+    @StateObject private var circleState      = FloatingCircleState()
     @StateObject private var webNav           = WebNavState()
     @StateObject private var standbyState     = StandbyState()
     @StateObject private var virtualCamera    = VirtualCameraManager()
@@ -24,7 +23,7 @@ struct ContentView: View {
                 cameraManager:    cameraManager,
                 recordingManager: recordingManager,
                 sceneManager:     sceneManager,
-                circleState:      activeCircleState,
+                circleState:      circleState,
                 webNav:           webNav,
                 standbyState:     standbyState,
                 virtualCamera:    virtualCamera,
@@ -33,38 +32,55 @@ struct ContentView: View {
                 browserURLInput:  $browserURLInput,
                 showSettings:     $showSettings
             )
-            .background(Color(NSColor.windowBackgroundColor))
 
-            Divider()
+            // ── Scene area ────────────────────────────────────────────────
+            Color(red: 233/255, green: 233/255, blue: 238/255)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .overlay {
+                    ZStack {
+                        Color(red: 11/255, green: 11/255, blue: 13/255)
 
-            // All scenes stay alive — prevents WebView reload on scene switch.
-            // Aspect ratio locked to 16:9 so content never gets cropped.
-            ZStack {
-                Scene1View(cameraManager: cameraManager)
-                    .opacity(sceneManager.activeScene == .camera ? 1 : 0)
-                    .allowsHitTesting(sceneManager.activeScene == .camera)
-                Scene2View(screenCapture: screenCapture, showPicker: $showWindowPicker)
-                    .opacity(sceneManager.activeScene == .window ? 1 : 0)
-                    .allowsHitTesting(sceneManager.activeScene == .window)
-                Scene3View(nav: webNav)
-                    .opacity(sceneManager.activeScene == .browser ? 1 : 0)
-                    .allowsHitTesting(sceneManager.activeScene == .browser)
-                Scene4View(state: standbyState)
-                    .opacity(sceneManager.activeScene == .standby ? 1 : 0)
-                    .allowsHitTesting(sceneManager.activeScene == .standby)
-            }
-            .animation(.easeInOut(duration: 0.22), value: sceneManager.activeScene)
-            .aspectRatio(16.0 / 9.0, contentMode: .fit)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay {
-                if sceneManager.activeScene.hasFloatingCircle, !activeCircleState.isHidden {
-                    FloatingCameraCircle(
-                        session:    cameraManager.session,
-                        isMirrored: cameraManager.isMirrored,
-                        state:      activeCircleState
-                    )
+                        Scene1View(cameraManager: cameraManager)
+                            .opacity(sceneManager.activeScene == .camera ? 1 : 0)
+                            .allowsHitTesting(sceneManager.activeScene == .camera)
+
+                        Scene2View(screenCapture: screenCapture, showPicker: $showWindowPicker)
+                            .opacity(sceneManager.activeScene == .window ? 1 : 0)
+                            .allowsHitTesting(sceneManager.activeScene == .window)
+
+                        Scene3View(nav: webNav)
+                            .opacity(sceneManager.activeScene == .browser ? 1 : 0)
+                            .allowsHitTesting(sceneManager.activeScene == .browser)
+
+                        Scene4View(state: standbyState)
+                            .opacity(sceneManager.activeScene == .standby ? 1 : 0)
+                            .allowsHitTesting(sceneManager.activeScene == .standby)
+
+                        if sceneManager.activeScene.hasFloatingCircle, !circleState.isHidden {
+                            FloatingCameraCircle(
+                                session:    cameraManager.session,
+                                isMirrored: cameraManager.isMirrored,
+                                state:      circleState
+                            )
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.22), value: sceneManager.activeScene)
+                    .aspectRatio(16.0 / 9.0, contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 11))
+                    .shadow(color: .black.opacity(0.25), radius: 14, y: 4)
+                    .overlay {
+                        VStack {
+                            HStack {
+                                if recordingManager.isRecording { recordingBadge }
+                                Spacer()
+                                if virtualCamera.isStreaming { broadcastingBadge }
+                            }
+                            Spacer()
+                        }
+                        .padding(13)
+                    }
+                    .padding(16)
                 }
-            }
         }
         .onAppear { setup() }
         .onDisappear { teardown() }
@@ -72,7 +88,7 @@ struct ContentView: View {
         .onReceive(nc.publisher(for: .studioSwitchScene)) { note in
             if let scene = note.object as? AppScene { sceneManager.setScene(scene) }
         }
-        .onReceive(nc.publisher(for: .studioToggleCircle))    { _ in activeCircleState.isHidden.toggle() }
+        .onReceive(nc.publisher(for: .studioToggleCircle))    { _ in circleState.isHidden.toggle() }
         .onReceive(nc.publisher(for: .studioToggleMic))       { _ in cameraManager.toggleMic() }
         .onReceive(nc.publisher(for: .studioToggleRecording)) { _ in
             if recordingManager.isRecording { recordingManager.stopRecording() }
@@ -117,11 +133,59 @@ struct ContentView: View {
         }
     }
 
-    private var nc: NotificationCenter { .default }
+    // MARK: - Badges
 
-    private var activeCircleState: FloatingCircleState {
-        sceneManager.activeScene == .browser ? circleState3 : circleState2
+    private var broadcastingBadge: some View {
+        HStack(spacing: 5) {
+            ZStack {
+                Circle().fill(Color.appBlue).frame(width: 5, height: 5)
+                Circle().stroke(Color.appBlue.opacity(0.55), lineWidth: 1.2).frame(width: 10, height: 10)
+                Circle().stroke(Color.appBlue.opacity(0.28), lineWidth: 1.2).frame(width: 15, height: 15)
+            }
+            .frame(width: 15, height: 15)
+            Text("שידור")
+                .font(.system(size: 11, weight: .semibold))
+                .environment(\.layoutDirection, .rightToLeft)
+        }
+        .foregroundStyle(Color.appBlueText)
+        .padding(.horizontal, 9)
+        .padding(.vertical, 5)
+        .background(Color(red: 0, green: 122/255, blue: 255/255).opacity(0.14))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(red: 0, green: 122/255, blue: 255/255).opacity(0.35), lineWidth: 1)
+        )
     }
+
+    private var recordingBadge: some View {
+        HStack(spacing: 5) {
+            Circle()
+                .fill(Color.appRed)
+                .frame(width: 7, height: 7)
+                .shadow(color: Color.appRed.opacity(0.55), radius: 3)
+            Text(formatDuration(recordingManager.duration))
+                .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                .environment(\.layoutDirection, .leftToRight)
+        }
+        .foregroundStyle(Color(red: 216/255, green: 48/255, blue: 42/255))
+        .padding(.horizontal, 9)
+        .padding(.vertical, 5)
+        .background(Color.appRed.opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.appRed.opacity(0.35), lineWidth: 1)
+        )
+    }
+
+    private func formatDuration(_ t: TimeInterval) -> String {
+        String(format: "%02d:%02d", Int(t) / 60, Int(t) % 60)
+    }
+
+    // MARK: - Helpers
+
+    private var nc: NotificationCenter { .default }
 
     // MARK: - Setup
 
@@ -141,9 +205,7 @@ struct ContentView: View {
             recordingManager?.appendSystemAudio(buf)
         }
 
-        // Load persisted state
-        AppPersistence.load(circle: circleState2, key: "circle2")
-        AppPersistence.load(circle: circleState3, key: "circle3")
+        AppPersistence.load(circle: circleState)
 
         let savedScene = AppPersistence.loadScene()
         sceneManager.setScene(savedScene == .standby ? .camera : savedScene)
@@ -165,8 +227,7 @@ struct ContentView: View {
             recordingManager: recordingManager,
             sceneManager:     sceneManager,
             virtualCamera:    virtualCamera,
-            circleState2:     circleState2,
-            circleState3:     circleState3,
+            circleState:      circleState,
             webNav:           webNav
         )
 
@@ -182,8 +243,7 @@ struct ContentView: View {
         cameraManager.stop()
         Task { await screenCapture.stopCapture() }
 
-        AppPersistence.save(circle: circleState2, key: "circle2")
-        AppPersistence.save(circle: circleState3, key: "circle3")
+        AppPersistence.save(circle: circleState)
     }
 
     private func restoreCamera() {

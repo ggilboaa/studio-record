@@ -20,22 +20,23 @@ enum AppPersistence {
     static func loadCameraID() -> String? { ud.string(forKey: "cameraID") }
     static func loadCameraMirrored() -> Bool { ud.bool(forKey: "cameraMirrored") }
 
-    // MARK: - Floating circle (per-scene key: "circle2" or "circle3")
-    static func save(circle: FloatingCircleState, key: String) {
-        ud.set(Double(circle.position.x), forKey: "\(key).x")
-        ud.set(Double(circle.position.y), forKey: "\(key).y")
-        ud.set(Double(circle.size),       forKey: "\(key).size")
-        ud.set(circle.isLocked,           forKey: "\(key).locked")
-        ud.set(circle.shape.rawValue,     forKey: "\(key).shape")
+    // MARK: - Floating circle (normalized fractions, single shared state)
+    static func save(circle: FloatingCircleState) {
+        ud.set(Double(circle.normX),    forKey: "circle.normX")
+        ud.set(Double(circle.normY),    forKey: "circle.normY")
+        ud.set(Double(circle.normSize), forKey: "circle.normSize")
+        ud.set(circle.isLocked,         forKey: "circle.locked")
+        ud.set(circle.shape.rawValue,   forKey: "circle.shape")
     }
-    static func load(circle: FloatingCircleState, key: String) {
-        let x    = ud.double(forKey: "\(key).x")
-        let y    = ud.double(forKey: "\(key).y")
-        let size = ud.double(forKey: "\(key).size")
-        if x != 0 || y != 0 { circle.position = CGPoint(x: x, y: y) }
-        if size > 0 { circle.size = CGFloat(size) }
-        circle.isLocked = ud.bool(forKey: "\(key).locked")
-        circle.shape    = CircleShape(rawValue: ud.string(forKey: "\(key).shape") ?? "") ?? .circle
+    static func load(circle: FloatingCircleState) {
+        let normX    = ud.double(forKey: "circle.normX")
+        let normY    = ud.double(forKey: "circle.normY")
+        let normSize = ud.double(forKey: "circle.normSize")
+        if normX    > 0 { circle.normX    = CGFloat(normX) }
+        if normY    > 0 { circle.normY    = CGFloat(normY) }
+        if normSize > 0 { circle.normSize = CGFloat(normSize) }
+        circle.isLocked = ud.bool(forKey: "circle.locked")
+        circle.shape    = CircleShape(rawValue: ud.string(forKey: "circle.shape") ?? "") ?? .circle
     }
 
     // MARK: - Browser URL

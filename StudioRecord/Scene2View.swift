@@ -74,94 +74,77 @@ struct FloatingCameraCircle: View {
     let isMirrored: Bool
     @ObservedObject var state: FloatingCircleState
 
-    @State private var dragOffset: CGSize = .zero
-    @State private var lastSize: CGFloat  = 150
+    @State private var dragOffset: CGSize  = .zero
+    @State private var lastNormSize: CGFloat = 0.18
 
     var body: some View {
         GeometryReader { geo in
-            let container = geo.size
-            circleContent
-                .position(
-                    x: state.position.x + dragOffset.width,
-                    y: state.position.y + dragOffset.height
-                )
-                .gesture(
-                    DragGesture(minimumDistance: 2)
-                        .onChanged { v in
-                            guard !state.isLocked else { return }
-                            dragOffset = v.translation
-                        }
-                        .onEnded { v in
-                            guard !state.isLocked else { return }
-                            state.position.x += v.translation.width
-                            state.position.y += v.translation.height
-                            dragOffset = .zero
-                        }
-                )
-                .gesture(MagnifyGesture()
+            let w = geo.size.width
+            let h = geo.size.height
+            let absX    = state.normX * w + dragOffset.width
+            let absY    = state.normY * h + dragOffset.height
+            let absSize = state.normSize * w
+            let absW    = state.shape == .roundedRect ? absSize * 1.33 : absSize
+
+            ZStack {
+                CameraPreviewView(session: session, isMirrored: isMirrored, gravity: .resizeAspectFill)
+                    .frame(width: absW, height: absSize)
+                    .clipShape(CircleClipShape(shape: state.shape, cornerFraction: 0.12))
+                    .overlay(
+                        CircleClipShape(shape: state.shape, cornerFraction: 0.12)
+                            .stroke(Color.white.opacity(0.35), lineWidth: 2)
+                    )
+                    .shadow(color: .black.opacity(0.45), radius: 10)
+                    .allowsHitTesting(false)
+
+                CircleClipShape(shape: state.shape, cornerFraction: 0.12)
+                    .fill(Color(white: 0, opacity: 0.001))
+                    .frame(width: absW, height: absSize)
+
+                if !state.isLocked {
+                    Image(systemName: "arrow.up.left.and.arrow.down.right")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(5)
+                        .background(Circle().fill(Color.black.opacity(0.6)))
+                        .offset(x: absW / 2 - 12, y: absSize / 2 - 12)
+                        .gesture(
+                            DragGesture(minimumDistance: 1)
+                                .onChanged { v in
+                                    guard !state.isLocked else { return }
+                                    let d = (v.translation.width + v.translation.height) / 2
+                                    state.normSize = max(0.05, min(0.6, lastNormSize + d / w))
+                                }
+                                .onEnded { _ in lastNormSize = state.normSize }
+                        )
+                }
+            }
+            .position(x: absX, y: absY)
+            .gesture(
+                DragGesture(minimumDistance: 2)
                     .onChanged { v in
                         guard !state.isLocked else { return }
-                        state.size = max(80, min(420, lastSize * v.magnification))
+                        dragOffset = v.translation
+                    }
+                    .onEnded { v in
+                        guard !state.isLocked else { return }
+                        state.normX = max(0, min(1, state.normX + v.translation.width  / w))
+                        state.normY = max(0, min(1, state.normY + v.translation.height / h))
+                        dragOffset = .zero
+                    }
+            )
+            .gesture(
+                MagnifyGesture()
+                    .onChanged { v in
+                        guard !state.isLocked else { return }
+                        state.normSize = max(0.05, min(0.6, lastNormSize * v.magnification))
                     }
                     .onEnded { _ in
                         guard !state.isLocked else { return }
-                        lastSize = state.size
+                        lastNormSize = state.normSize
                     }
-                )
-                .onAppear {
-                    lastSize = state.size
-                    // Clamp initial position inside container
-                    if container.width > 0 {
-                        state.position.x = min(max(state.position.x, 0), container.width)
-                        state.position.y = min(max(state.position.y, 0), container.height)
-                    }
-                }
-                .onChange(of: container) { oldSize, newSize in
-                    guard oldSize.width > 0, oldSize.height > 0 else { return }
-                    let scale = newSize.width / oldSize.width
-                    state.position.x *= scale
-                    state.position.y *= newSize.height / oldSize.height
-                    state.size       *= scale
-                    lastSize          = state.size
-                }
-        }
-    }
-
-    private var circleContent: some View {
-        ZStack {
-            CameraPreviewView(session: session, isMirrored: isMirrored, gravity: .resizeAspectFill)
-                .frame(width: state.frameWidth, height: state.frameHeight)
-                .clipShape(CircleClipShape(shape: state.shape, cornerFraction: 0.12))
-                .overlay(CircleClipShape(shape: state.shape, cornerFraction: 0.12)
-                    .stroke(Color.white.opacity(0.35), lineWidth: 2))
-                .shadow(color: .black.opacity(0.45), radius: 10)
-                .allowsHitTesting(false)
-
-            // Transparent drag target
-            CircleClipShape(shape: state.shape, cornerFraction: 0.12)
-                .fill(Color(white: 0, opacity: 0.001))
-                .frame(width: state.frameWidth, height: state.frameHeight)
-
-            // Resize handle — bottom-right edge
-            if !state.isLocked {
-                Image(systemName: "arrow.up.left.and.arrow.down.right")
-                    .font(.system(size: 9, weight: .bold))
-                    .foregroundStyle(.white)
-                    .padding(5)
-                    .background(Circle().fill(Color.black.opacity(0.6)))
-                    .offset(
-                        x: state.frameWidth  / 2 - 12,
-                        y: state.frameHeight / 2 - 12
-                    )
-                    .gesture(
-                        DragGesture(minimumDistance: 1)
-                            .onChanged { v in
-                                let d = (v.translation.width + v.translation.height) / 2
-                                state.size = max(80, min(420, lastSize + d))
-                            }
-                            .onEnded { _ in lastSize = state.size }
-                    )
-            }
+            )
+            .onAppear { lastNormSize = state.normSize }
         }
     }
 }

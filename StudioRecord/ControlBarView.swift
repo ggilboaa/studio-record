@@ -402,7 +402,7 @@ struct ControlBarView: View {
         }
     }
 
-    // Shared circle controls (lock + shape) — used centered in browser's second row
+    // Shared circle controls (lock + shape + flip) — used centered in browser's second row
     @ViewBuilder
     private var circleControlsButtons: some View {
         Button { circleState.isLocked.toggle() } label: {
@@ -419,6 +419,13 @@ struct ControlBarView: View {
         }
         .buttonStyle(.bordered)
         .help(circleState.shape == .circle ? "שנה למלבן מעוגל" : "שנה לעיגול")
+
+        Button { cameraManager.toggleFlip() } label: {
+            Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
+        }
+        .buttonStyle(.bordered)
+        .tint(cameraManager.isMirrored ? .accentColor : nil)
+        .help("הפוך צדדים")
     }
 
     // Scene 4: Standby image + message + presets
