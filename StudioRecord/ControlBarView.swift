@@ -313,6 +313,8 @@ struct ControlBarView: View {
             }
             .frame(maxWidth: .infinity)
 
+            Divider().frame(height: 20)
+
             Button { cameraManager.toggleFlip() } label: {
                 Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
             }
