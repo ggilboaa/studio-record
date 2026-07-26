@@ -117,10 +117,12 @@ struct FloatingCameraCircle: View {
                     }
                 }
                 .onChange(of: container) { oldSize, newSize in
-                    // Rescale position proportionally when container resizes
                     guard oldSize.width > 0, oldSize.height > 0 else { return }
-                    state.position.x = state.position.x * newSize.width  / oldSize.width
-                    state.position.y = state.position.y * newSize.height / oldSize.height
+                    let scale = newSize.width / oldSize.width
+                    state.position.x *= scale
+                    state.position.y *= newSize.height / oldSize.height
+                    state.size       *= scale
+                    lastSize          = state.size
                 }
         }
     }
